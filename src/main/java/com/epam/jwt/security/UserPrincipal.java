@@ -2,6 +2,7 @@ package com.epam.jwt.security;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -82,19 +83,44 @@ public class UserPrincipal implements UserDetails {
 	@Override
 	public boolean isAccountNonLocked() {
 
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
 
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
 
-		return false;
+		return true;
 	}
 
+	@Override
+	public int hashCode() {
+		
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserPrincipal other = (UserPrincipal) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
+		
+	
 }
